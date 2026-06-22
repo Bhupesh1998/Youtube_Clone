@@ -1,8 +1,26 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOUTUBE_SEARCH_API } from "../utils/contants";
 
 function Head() {
   const dispatch = useDispatch();
+  const [inputValue, setInputVal] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (!inputValue) {
+        setSuggestions([]);
+        return;
+      }
+      const data = await fetch(YOUTUBE_SEARCH_API + inputValue);
+      const json = await data.json();
+      setSuggestions(json[1] || []);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
 
   return (
     <div className="fixed top-0 left-0 right-0 h-14 bg-white flex items-center justify-between px-4 z-50">
@@ -30,24 +48,56 @@ function Head() {
       </div>
 
       <div className="flex items-center flex-1 max-w-2xl mx-4">
-        <div className="flex items-center w-full">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 text-sm"
-          />
-          <button className="px-5 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-full hover:bg-gray-200">
-            <svg
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
-            </svg>
-          </button>
+        <div className="relative w-full">
+          <div className="flex">
+            <input
+              type="text"
+              placeholder="Search"
+              value={inputValue}
+              onChange={(e) => setInputVal(e.target.value)}
+              onFocus={() => suggestions.length && setSuggestions(suggestions)}
+              onBlur={() => setTimeout(() => setSuggestions([]), 200)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 text-sm"
+            />
+            <button className="px-5 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-full hover:bg-gray-200">
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </button>
+          </div>
+          {suggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg mt-1 overflow-hidden">
+              {suggestions.map((s, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                  onClick={() => {
+                    setInputVal(s);
+                    setSuggestions([]);
+                  }}
+                >
+                  <svg
+                    className="w-4 h-4 text-gray-400 shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                  {s}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
