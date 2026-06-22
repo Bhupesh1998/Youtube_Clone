@@ -1,8 +1,4 @@
-const formatViews = (views) => {
-  if (views >= 1_000_000) return (views / 1_000_000).toFixed(1) + "M";
-  if (views >= 1_000) return (views / 1_000).toFixed(1) + "K";
-  return views;
-};
+import { formatViews } from "../utils/helpers";
 
 function VideoCard({ info }) {
   const { snippet, statistics } = info;

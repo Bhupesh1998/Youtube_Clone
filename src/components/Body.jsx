@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
 import Maincontainer from "./Maincontainer";
+import { Outlet } from "react-router-dom";
 
 export default function Body() {
   const isSidebarOpen = useSelector((store) => store.app.isSidebarOpen);
@@ -15,7 +16,7 @@ export default function Body() {
         <Sidebar />
       </div>
       <div className="flex-1 min-w-0">
-        <Maincontainer />
+        <Outlet />
       </div>
     </div>
   );
