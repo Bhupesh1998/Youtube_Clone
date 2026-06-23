@@ -17,10 +17,10 @@ function Watchpage() {
   if (!videoId) return <div className="pt-14 p-4">No video selected</div>;
 
   return (
-    <div className="pt-14 p-4 max-w-7xl mx-auto">
+    <div className="pt-14 px-2 sm:px-4 py-2 sm:py-4 max-w-7xl mx-auto">
       <div className="flex gap-4 flex-col lg:flex-row">
         <div className="flex-1 min-w-0">
-          <div className="aspect-video bg-black rounded-xl overflow-hidden">
+          <div className="aspect-video bg-black rounded-lg sm:rounded-xl overflow-hidden">
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
               className="w-full h-full"

@@ -37,7 +37,7 @@ function LiveChat() {
     setInputVal("");
   };
   return (
-    <div className="w-full bg-gray-900 rounded-xl overflow-hidden border border-gray-700 flex flex-col h-[500px]">
+    <div className="w-full bg-gray-900 rounded-xl overflow-hidden border border-gray-700 flex flex-col h-[350px] sm:h-[450px] lg:h-[500px]">
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-semibold text-gray-100">Live Chat</h3>

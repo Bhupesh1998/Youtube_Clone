@@ -7,6 +7,7 @@ function Head() {
   const dispatch = useDispatch();
   const [inputValue, setInputVal] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(async () => {
@@ -23,8 +24,8 @@ function Head() {
   }, [inputValue]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-14 bg-white flex items-center justify-between px-4 z-50">
-      <div className="flex items-center gap-4">
+    <div className="fixed top-0 left-0 right-0 h-14 bg-white flex items-center justify-between px-2 sm:px-4 z-50">
+      <div className={`flex items-center gap-1 sm:gap-4 ${showSearch ? "hidden sm:flex" : ""}`}>
         <button
           onClick={() => dispatch(toggleMenu())}
           className="p-2 hover:bg-gray-100 rounded-full"
@@ -40,16 +41,28 @@ function Head() {
           </svg>
         </button>
         <div className="flex items-center gap-1 cursor-pointer">
-          <svg className="w-7 h-7" viewBox="0 0 24 24" fill="red">
+          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="red">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
           </svg>
-          <span className="text-lg font-semibold tracking-tight">YouTube</span>
+          <span className="text-base sm:text-lg font-semibold tracking-tight">YouTube</span>
         </div>
       </div>
 
-      <div className="flex items-center flex-1 max-w-2xl mx-4">
+      <div className={`${showSearch ? "flex" : "hidden sm:flex"} items-center flex-1 max-w-2xl mx-1 sm:mx-4`}>
         <div className="relative w-full">
           <div className="flex">
+            <button
+              className="sm:hidden p-2 hover:bg-gray-100 rounded-full mr-1"
+              onClick={() => {
+                setShowSearch(false);
+                setInputVal("");
+                setSuggestions([]);
+              }}
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
+            </button>
             <input
               type="text"
               placeholder="Search"
@@ -57,11 +70,11 @@ function Head() {
               onChange={(e) => setInputVal(e.target.value)}
               onFocus={() => suggestions.length && setSuggestions(suggestions)}
               onBlur={() => setTimeout(() => setSuggestions([]), 200)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 text-sm"
+              className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 text-sm"
             />
-            <button className="px-5 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-full hover:bg-gray-200">
+            <button className="px-4 sm:px-5 py-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r-full hover:bg-gray-200">
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -101,10 +114,19 @@ function Head() {
         </div>
       </div>
 
-      <div className="flex items-center">
+      <div className={`flex items-center gap-0 sm:gap-1 ${showSearch ? "hidden sm:flex" : ""}`}>
+        <button
+          className="sm:hidden p-2 hover:bg-gray-100 rounded-full"
+          onClick={() => setShowSearch(true)}
+        >
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+        </button>
         <button className="p-2 hover:bg-gray-100 rounded-full">
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5 sm:w-6 sm:h-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
