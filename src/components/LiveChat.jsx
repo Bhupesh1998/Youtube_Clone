@@ -1,108 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addmessages } from "../utils/chatSlices";
-import { generateRandomName } from "../utils/helpers";
-
-const chatMessages = [
-  {
-    user: "Priya Sharma",
-    message: "First time watching live! 🔥",
-    isMember: true,
-  },
-  {
-    user: "Rahul Verma",
-    message: "Great stream! Love the content",
-    isMember: false,
-  },
-  {
-    user: "Ananya Gupta",
-    message: "Hello from Mumbai!",
-    isMember: true,
-  },
-  {
-    user: "Vikram Singh",
-    message: "Can you explain the difference between useMemo and useCallback?",
-    isMember: false,
-  },
-  {
-    user: "Sneha Patel",
-    message: "This is so helpful, thank you! 🙏",
-    isMember: false,
-  },
-  {
-    user: "Arjun Nair",
-    message: "What editor are you using?",
-    isMember: true,
-  },
-  {
-    user: "Neha Reddy",
-    message: "Just subscribed! 🔔",
-    isMember: false,
-  },
-  {
-    user: "Divya Jain",
-    message: "Can you share the GitHub repo link?",
-    isMember: true,
-  },
-  {
-    user: "Karan Mehta",
-    message: "Watching from Delhi!",
-    isMember: false,
-  },
-  {
-    user: "Riya Kapoor",
-    message: "This deserves way more views",
-    isMember: false,
-  },
-  {
-    user: "Pooja Singh",
-    message: "Best explanation on YouTube!",
-    isMember: true,
-  },
-  {
-    user: "Harsh Vardhan",
-    message: "Please make a video on Redux Toolkit",
-    isMember: false,
-  },
-  {
-    user: "Tanvi Shah",
-    message: "Hello from the chat! 👋",
-    isMember: false,
-  },
-  {
-    user: "Manish Tiwari",
-    message: "Could you do a React Native video too?",
-    isMember: true,
-  },
-  {
-    user: "Kriti Agarwal",
-    message: "Love the energy in this stream!",
-    isMember: false,
-  },
-];
-
-const ChatMessage = ({ data }) => {
-  const initial = data.user.charAt(0).toUpperCase();
-
-  return (
-    <div className="flex items-start gap-2 px-3 py-1.5 hover:bg-gray-800/50">
-      <div className="w-6 h-6 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-gray-200 flex-shrink-0 mt-0.5">
-        {initial}
-      </div>
-      <div>
-        <span className="text-sm font-semibold text-gray-100">
-          {data.user}
-          {data.isMember && (
-            <span className="ml-1 text-[10px] px-1 py-0.5 rounded bg-gray-600 text-gray-300 font-normal">
-              Member
-            </span>
-          )}
-        </span>
-        <p className="text-sm text-gray-300 leading-snug">{data.message}</p>
-      </div>
-    </div>
-  );
-};
+import { generateRandomName, generateRandomComments } from "../utils/helpers";
+import ChatMessage from "./ChatMessage";
 
 function LiveChat() {
   const [inputVal, setInputVal] = useState("");
@@ -113,8 +13,8 @@ function LiveChat() {
       dispatch(
         addmessages({
           user: generateRandomName(),
-          message: "Love the energy in this stream!",
-          isMember: false,
+          message: generateRandomComments(),
+          isMember: Math.random() > 0.5,
         }),
       );
     }, 2000);
@@ -142,7 +42,7 @@ function LiveChat() {
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-semibold text-gray-100">Live Chat</h3>
           <span className="text-xs text-gray-500">•</span>
-          <span className="text-xs text-gray-500">{chatMessages.length}</span>
+          <span className="text-xs text-gray-500">{chats.length}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />

@@ -190,3 +190,35 @@ var finalName = "";
 export function generateRandomName() {
   return nameList[Math.floor(Math.random() * nameList.length)];
 }
+
+const chatMessages = [
+  "Love the energy in this stream! 🔥",
+  "First time watching live!",
+  "Great stream! Love the content",
+  "Hello from Mumbai!",
+  "This is so helpful, thank you! 🙏",
+  "What editor are you using?",
+  "Just subscribed! 🔔",
+  "Can you share the GitHub repo link?",
+  "Watching from Delhi!",
+  "This deserves way more views",
+  "Best explanation on YouTube!",
+  "Please make a video on Redux Toolkit",
+  "Hello from the chat! 👋",
+  "Could you do a React Native video too?",
+  "Hey everyone! 👋",
+  "Can you explain that part again?",
+  "Been following since 1k subs! 🚀",
+  "Love this community ❤️",
+  "Finally understanding this concept",
+  "Your content is pure gold",
+  "Keep up the great work!",
+  "This is fire! 🔥",
+  "Learning so much, thank you!",
+  "Hello from the US!",
+  "Best channel for React",
+];
+
+export function generateRandomComments() {
+  return chatMessages[Math.floor(Math.random() * chatMessages.length)];
+}
