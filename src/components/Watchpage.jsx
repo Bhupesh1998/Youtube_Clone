@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideDrawer } from "../utils/appSlice";
 import { useSearchParams } from "react-router";
+import CommentContainer from "./CommentContainer";
 
 function Watchpage() {
   const [searchParams] = useSearchParams();
@@ -24,6 +25,7 @@ function Watchpage() {
           title="YouTube video player"
         />
       </div>
+      <CommentContainer />
     </div>
   );
 }
