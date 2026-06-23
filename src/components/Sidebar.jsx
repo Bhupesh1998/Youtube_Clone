@@ -218,15 +218,6 @@ function Sidebar() {
         ))}
       </div>
       <hr className="mx-3 my-3 border-gray-200" />
-      <div className="px-6 py-3 text-[11px] text-gray-400 leading-4">
-        <p className="mb-1">About Press Copyright</p>
-        <p className="mb-1">Contact us Creators</p>
-        <p className="mb-1">Advertise Developers</p>
-        <p className="mb-3">Terms Privacy Policy & Safety</p>
-        <p className="mb-1">How YouTube works</p>
-        <p>Test new features</p>
-        <p className="mt-3 text-gray-500 text-[10px]">© 2025 Google LLC</p>
-      </div>
     </div>
   );
 }
